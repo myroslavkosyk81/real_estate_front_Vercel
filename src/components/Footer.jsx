@@ -36,7 +36,7 @@ export default function Footer() {
   return (
     <header className='flex items-center h-[7vh] bg-slate-200 shadow-md w-full bottom-0'>
         <div className='flex justify-between max-w-6xl mx-auto p-3'>
-          <Link to='https://portfolio-mk-2023.vercel.app/'>
+          <Link to='https://portfolio-mk-2024.vercel.app/'>
             <h1 className='font-bold text-xs sm:text-l flex flex-wrap gap-3 items-center'>
                 <span className='text-slate-500'>Developed by</span>
                 <img className='h-10 w-10 object-cover' onClick={() => changeLanguage('uk')} src='https://firebasestorage.googleapis.com/v0/b/real-estate-7f0dd.appspot.com/o/App_don%E2%80%99t%20delete%2FBSB_logo.png?alt=media&token=485e4b8d-314b-4c51-a158-443017195551' alt="Українська" />
