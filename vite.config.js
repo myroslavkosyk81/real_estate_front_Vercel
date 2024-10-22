@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://real-estate-back-vercel.vercel.app/',
+        target: `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}`,
         secure: false,
       },
     },
