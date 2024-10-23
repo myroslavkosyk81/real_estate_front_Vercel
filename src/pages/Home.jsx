@@ -22,6 +22,7 @@ export default function Home() {
     const fetchOfferListings = async () =>{
       try {
         const res = await fetch('/api/listing/get?offer=true&limit=4');
+        console.log(res)
         const data = await res.json();
         setOfferListings(data);
         fetchRentListings();
