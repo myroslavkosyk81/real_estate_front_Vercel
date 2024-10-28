@@ -9,7 +9,6 @@ dotenv.config()
 export default defineConfig({
   server: {
     proxy: {
-      '/foo': 'https://real-estate-back-vercel.vercel.app',
       '/api': {
         // target: 'http://localhost:3000',
         target: `${process.env.VITE_APP_API_URL}`,
