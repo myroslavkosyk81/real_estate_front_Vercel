@@ -11,8 +11,9 @@ export default defineConfig({
     proxy: {
       '/api': {
         // target: 'http://localhost:3000',
-        target: `${process.env.VITE_APP_API_URL}`,
-        secure: false,
+        changeOrigin: true,
+           secure: false,      
+           ws: true,
         // configure: (proxy, _options) => {
         //   proxy.on('error', (err, _req, _res) => {
         //     console.log('proxy error', err);
