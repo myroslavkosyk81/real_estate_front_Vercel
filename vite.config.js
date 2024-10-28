@@ -1,19 +1,18 @@
 import { defineConfig, loadEnv  } from 'vite'
 
 import react from '@vitejs/plugin-react-swc'
-import dotenv from 'dotenv'
 
-dotenv.config()
-//console.log(process.env.VITE_APP_API_URL)
+console.log(process.env.VITE_APP_API_URL)
 
 export default defineConfig({
   server: {
     proxy: {
       '/api': {
         // target: 'http://localhost:3000',
+        target: `${process.env.VITE_APP_API_URL}`,
         changeOrigin: true,
-           secure: false,      
-           ws: true,
+        secure: false,      
+        ws: true,
         // configure: (proxy, _options) => {
         //   proxy.on('error', (err, _req, _res) => {
         //     console.log('proxy error', err);
