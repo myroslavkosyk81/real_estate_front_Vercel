@@ -34,8 +34,18 @@ export default function Listing() {
             try {
                 
                 setLoading(true);
-                const res = await fetch(`/api/listing/get/${params.listingId}`)
+                const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/listing/get/${params.listingId}`, {
+                    method: 'GET',
+                    headers: {
+                    'Cache-Control': 'no-cache',
+                    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+                    'Pragma': 'no-cache',
+                    'Expires': '0',
+                    },
+                })
+                // console.log(listing.listingId)
                 const data = await res.json();
+                // console.log(data)
                 if (data.success === false) {
                     setError(true);
                     setLoading(false);
