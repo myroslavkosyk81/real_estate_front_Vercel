@@ -115,6 +115,7 @@ export default function CreateListing() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
                 },
                 body: JSON.stringify({
                     ...formData,
