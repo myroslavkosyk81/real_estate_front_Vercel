@@ -7,7 +7,7 @@ import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
 import '../i18n.js';
 import { useTranslation } from 'react-i18next';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
@@ -20,17 +20,17 @@ export default function Home() {
   const { t } = useTranslation();
   
   const [token, setToken] = useState(null);
-  const accessToken = Cookies.get('access_token');
+  // const accessToken = Cookies.get('access_token');
 // console.log(accessToken); // Should print the token if it's in cookies
 
-useEffect(() => {
-  if (token) {
-    Cookies.set('access_token', token, { path: '/' });
-  }
-}, [token]);
+// useEffect(() => {
+//   if (token) {
+//     Cookies.set('access_token', token, { path: '/' });
+//   }
+// }, [token]);
 
   useEffect(() => {
-    const accessToken = Cookies.get('access_token');
+    // const accessToken = Cookies.get('access_token');
     // console.log(accessToken);
     const fetchOfferListings = async () =>{
       try {
