@@ -7,7 +7,7 @@ import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
 import '../i18n.js';
 import { useTranslation } from 'react-i18next';
-
+import Cookies from 'js-cookie';
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
@@ -19,15 +19,28 @@ export default function Home() {
 
   const { t } = useTranslation();
   
+  const [token, setToken] = useState(null);
+  const accessToken = Cookies.get('access_token');
+// console.log(accessToken); // Should print the token if it's in cookies
+
+useEffect(() => {
+  if (token) {
+    Cookies.set('access_token', token, { path: '/' });
+  }
+}, [token]);
 
   useEffect(() => {
+    const accessToken = Cookies.get('access_token');
+    // console.log(accessToken);
     const fetchOfferListings = async () =>{
       try {
         const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/listing/get?offer=true&limit=4`, {
           method: 'GET',
+          credentials: 'include',
           headers: {
             'Cache-Control': 'no-cache',
             'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Credentials': 'true',
             'Pragma': 'no-cache',
             'Expires': '0',
           },
@@ -55,9 +68,11 @@ export default function Home() {
       try {
         const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/listing/get?type=rent&limit=4`, {
           method: 'GET',
+          credentials: 'include',
           headers: {
             'Cache-Control': 'no-cache',
             'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Credentials': 'true',
             'Pragma': 'no-cache',
             'Expires': '0',
           },
@@ -83,8 +98,11 @@ export default function Home() {
       try {
         const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/listing/get?type=sale&limit=4`, {
           method: 'GET',
+          credentials: 'include',
           headers: {
             'Cache-Control': 'no-cache',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Credentials': 'true',
             'Pragma': 'no-cache',
             'Expires': '0',
           },
