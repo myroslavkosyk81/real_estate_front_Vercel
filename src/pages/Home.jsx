@@ -5,10 +5,13 @@ import { Navigation } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
+import Loader from '../components/Loader.jsx';
+
 import '../i18n.js';
 import { useTranslation } from 'react-i18next';
 // import Cookies from 'js-cookie';
 export default function Home() {
+  const [loading, setLoading] = useState(true);
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
@@ -58,6 +61,7 @@ export default function Home() {
         const data = await res.json();
         // console.log(data)
         setOfferListings(data);
+        setLoading(false);
         fetchRentListings();
       } catch (error) {
         console.log(error)
@@ -88,6 +92,7 @@ export default function Home() {
         // });
         const data = await res.json();
         setRentListings(data);
+        setLoading(false);
         fetchSaleListings();
       } catch (error) {
         console.log(error)
@@ -117,6 +122,7 @@ export default function Home() {
         // });
         const data = await res.json();
         setSaleListings(data);
+        setLoading(false);
       } catch (error) {
         console.log(error)
       }
@@ -125,7 +131,7 @@ export default function Home() {
   }, []);
 
 
-  return (
+  return loading ? <Loader /> :  (
     <div>
       {/* top */}
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto'>
