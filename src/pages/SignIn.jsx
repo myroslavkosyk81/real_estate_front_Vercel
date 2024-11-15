@@ -25,15 +25,21 @@ export default function SignIn() {
       dispatch(signInStart());
       const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/auth/sign-in`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
         'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Credentials': 'true',
+        'Pragma': 'no-cache',
+        'Expires': '0',
       },
+      
       body: JSON.stringify(formData),
       }
     );
     const data = await res.json();
-    // console.log(data)
+    console.log(data)
     if(data.success === false) {
       dispatch(signInFailure(data.message));
       
