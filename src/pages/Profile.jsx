@@ -64,11 +64,17 @@ export default function Profile() {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`,
+      const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/user/update/${currentUser._id}`,
         {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Credentials': 'true',
+            'Pragma': 'no-cache',
+            'Expires': '0',
           },
           body: JSON.stringify(formData),
         }
@@ -87,8 +93,16 @@ export default function Profile() {
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
+        credentials: 'include',
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Credentials': 'true',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+          },
       });
       const data = await res.json();
       if (data.success === false) {
@@ -104,7 +118,17 @@ export default function Profile() {
   const handleSignOut = async () => {
     try {
       dispatch(signOutStart());
-      const res = await fetch('/api/auth/signout');
+      const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/auth/signout`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+          'Access-Control-Allow-Credentials': 'true',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+        },
+      });
       const data = await res.json();
       if (data.success === false) {
         dispatch(signInFailure(data.message));
@@ -118,9 +142,22 @@ export default function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/user/listings/${currentUser._id}`, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Credentials': 'true',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+          },
+        }
+      );
+      console.log(res)
       const data = await res.json();
-
+      // console.log(data)
       if (data.success === false) {
         setShowListingsError(true);
         return;
@@ -132,7 +169,16 @@ export default function Profile() {
   };
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, { method: 'DELETE', 
+      const res = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/listing/delete/${listingId}`, { 
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+            'Cache-Control': 'no-cache',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Credentials': 'true',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+          },
     });
       const data = await res.json();
       if (data.success === false) {
